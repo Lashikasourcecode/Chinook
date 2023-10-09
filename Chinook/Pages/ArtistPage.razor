@@ -144,10 +144,10 @@ else
     {
         var noOfAlbum = 0;
         return noOfAlbum = await _artistService.DisplayNumberOfAlbum(); 
-        
+
     }
 
-    
+
 
     private async Task<List<Chinook.Models.Playlist>> GetPlayListById(long id)
     {
@@ -156,6 +156,19 @@ else
         return SelectedPlayList; 
 
     }
+
+
+
+    private async Task<ActionResult<Chinook.Models.Playlist>> AddTrackToPlaylist(Chinook.Models.Playlist playlist)
+    {
+        var newPlayList = await _artistService.CreatePlayList(playlist);
+        
+        return new CreatedAtActionResult(nameof(GetPlayListById), "Playlist", new { playlistId = newPlayList.PlaylistId },newPlayList);
+                                      
+
+    }
+
+   
 
    
 
